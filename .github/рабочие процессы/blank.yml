@@ -1,2 +1,19 @@
+название: Синхронизировать форк
 
-& "${Env:PROGRAMFILES(X86)}\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe" --code="4/0ARtbsJq5I4OArswtsz5I_vv54CbIQxbUvyeYmAGRU9dhHvpgwAM_tT1m_5mgA3Q7FswuDQ" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$Env:COMPUTERNAME
+ на:
+ Расписание:
+ - cron: '*/30 * * * *' # каждые 30 минут
+   workflow_dispatch: # задания по нажатию кнопки on
+
+:
+ синхронизация:
+
+ запуск: ubuntu-последние
+
+     шаги:
+ - использует: TG908/fork-sync@v1.1
+         с:
+ github_token: $ {{ секреты.GITHUB_TOKEN }}
+           владелец: llvm
+           база: мастер
+           руководитель: мастер
